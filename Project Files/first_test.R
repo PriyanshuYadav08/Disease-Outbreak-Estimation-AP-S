@@ -40,11 +40,18 @@ ggplot(sim_df, aes(x = Day, y = SimulatedCases)) +
        y = "Number of Cases") +
   theme_minimal()
 
-# Start the PNG device
-png("my_plot.png", width = 800, height = 600)
+# Set working directory to where your script is
+setwd("D:/Disease-Outbreak-Estimation-AP-S/Project Files")
 
-# Generate the plot
-plot(1:10, main = "Example Plot")
+# Ensure output folder exists
+if (!dir.exists("../Project Pictures")) {
+  dir.create("../Project Pictures")
+}
 
-# Close the device to save the file
+# Define output path
+output_path <- "../Project Pictures/my_plot.png"
+
+# Save plot
+png(filename = output_path, width = 800, height = 600)
+plot(1:10, main = "Working Plot")
 dev.off()
