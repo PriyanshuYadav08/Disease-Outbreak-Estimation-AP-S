@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 
 def load_data():
     # Load the COVID-19 dataset
-    df = pd.read_csv("../Datasets/time_series_covid-19_confirmed.csv")
+    df = pd.read_csv("../../Datasets/time_series_covid-19_confirmed.csv")
 
     # Filter only for India
     india_df = df[df['Country/Region'] == 'India']

@@ -2,7 +2,7 @@ library(dplyr)
 library(caret)
 
 load_data <- function() {
-  df <- read.csv("../Datasets/time_series_covid-19_confirmed.csv", check.names = FALSE)
+  df <- read.csv("Dataset/time_series_covid-19_confirmed.csv", check.names = FALSE)
 
   # Filter for India
   india <- df %>% filter(`Country/Region` == "India")
