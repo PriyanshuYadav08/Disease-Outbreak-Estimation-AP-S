@@ -24,22 +24,26 @@ setwd("D:/Disease-Outbreak-Estimation-AP-S/Project Files")
 
 # Create output folder if needed
 if (!dir.exists("../Project Pictures")) {
-  dir.create("../Project Pictures")
+    dir.create("../Project Pictures")
 }
 
 # Save actual vs predicted plot
-output_path <- "../Project Pictures/first_good_plot.png"
-png(filename = output_path, width = 800, height = 600)
+output_path <- "../Project Pictures/Tested_Graph.png"
+png(filename = output_path, width = 1600, height = 1600)
 
 # Plot with legend
-plot(data$daily_positive_cases, type = "l", col = "black", lwd = 2,
-     main = "COVID-19 Daily Cases: Actual vs Poisson & Binomial Predictions",
-     ylab = "Daily Cases", xlab = "Day",
-     ylim = range(c(data$daily_positive_cases, poisson_pred, binom_pred)))
+plot(data$daily_positive_cases,
+    type = "l", col = "black", lwd = 2,
+    main = "COVID-19 Daily Cases: Actual vs Poisson & Binomial Predictions",
+    ylab = "Daily Cases", xlab = "Day",
+    ylim = range(c(data$daily_positive_cases, poisson_pred, binom_pred))
+)
 lines(poisson_pred, col = "red", lwd = 2)
 lines(binom_pred, col = "blue", lwd = 2)
-legend("topright", legend = c("Actual", "Poisson", "Binomial"),
-       col = c("black", "red", "blue"), lty = 1, lwd = 2)
+legend("topright",
+    legend = c("Actual", "Poisson", "Binomial"),
+    col = c("black", "red", "blue"), lty = 1, lwd = 2
+)
 
 dev.off()
 
