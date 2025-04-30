@@ -45,11 +45,11 @@ nb_pred <- predict(nb_model, type = "response")
 
 
 
-# Forecast for the next 10 days
-future_days <- data.frame(day_number = (nrow(data) + 1):(nrow(data) + 10))
+# Forecast for the next 100 days
+future_days <- data.frame(day_number = (nrow(data) + 1):(nrow(data) + 100))
 future_nb_pred <- predict(nb_model, newdata = future_days, type = "response")
-future_poisson <- rpois(10, lambda)
-future_binom <- rbinom(10, size = round(mean(data$daily_tests)), prob = p_hat)
+future_poisson <- rpois(100, lambda)
+future_binom <- rbinom(100, size = round(mean(data$daily_tests)), prob = p_hat)
 
 
 
@@ -58,9 +58,9 @@ future_binom <- rbinom(10, size = round(mean(data$daily_tests)), prob = p_hat)
 # Print errors and forecasts
 cat("Poisson MAE:", mean(abs(data$daily_positive_cases - poisson_pred)), "\n")
 cat("Binomial MAE:", mean(abs(data$daily_positive_cases - binom_pred)), "\n")
-cat("10-day Negative Binomial Forecast = ", round(future_nb_pred), "\n")
-cat("10-day Poisson Forecast = ", future_poisson, "\n")
-cat("10-day Binomial Forecast = ", future_binom, "\n")
+cat("100-day Negative Binomial Forecast = ", round(future_nb_pred), "\n")
+cat("100-day Poisson Forecast = ", future_poisson, "\n")
+cat("100-day Binomial Forecast = ", future_binom, "\n")
 
 
 
@@ -97,15 +97,15 @@ dev.off()
 
 
 
-# Save 10-day forecast plot
+# Save 100-day forecast plot
 forecast_output_path <- "../Project Pictures/Forecast_Plot.png"
 png(filename = forecast_output_path, width = 800, height = 800)
-plot(1:10, round(future_nb_pred), type = "o", col = "green", lwd = 2, pch = 16,
+plot(1:100, round(future_nb_pred), type = "o", col = "green", lwd = 2, pch = 16,
      main = "10-Day Forecast - Poisson, Binomial and Negative Binomial",
      xlab = "Day", ylab = "Predicted Cases",
      ylim = range(c(future_nb_pred, future_poisson, future_binom)))
-lines(1:10, future_poisson, type = "o", col = "red", lwd = 2, pch = 16)
-lines(1:10, future_binom, type = "o", col = "blue", lwd = 2, pch = 16)
+lines(1:100, future_poisson, type = "o", col = "red", lwd = 2, pch = 16)
+lines(1:100, future_binom, type = "o", col = "blue", lwd = 2, pch = 16)
 legend("topright",
        legend = c("Negative Binomial", "Poisson", "Binomial"),
        col = c("green", "red", "blue"), lty = 1, lwd = 2, pch = 16)
