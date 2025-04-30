@@ -72,3 +72,20 @@ legend("topright",
 )
 
 dev.off()
+
+# Save 7-day forecast plot
+forecast_output_path <- "../Project Pictures/Forecast_Plot.png"
+png(filename = forecast_output_path, width = 800, height = 800)
+
+# Plot 7-day forecast
+plot(1:7, round(future_nb_pred), type = "o", col = "green", lwd = 2, pch = 16,
+     main = "7-Day Forecast: Poisson, Binomial, and Negative Binomial",
+     xlab = "Day", ylab = "Predicted Cases",
+     ylim = range(c(future_nb_pred, future_poisson, future_binom)))
+lines(1:7, future_poisson, type = "o", col = "red", lwd = 2, pch = 16)
+lines(1:7, future_binom, type = "o", col = "blue", lwd = 2, pch = 16)
+legend("topright",
+       legend = c("Negative Binomial", "Poisson", "Binomial"),
+       col = c("green", "red", "blue"), lty = 1, lwd = 2, pch = 16)
+
+dev.off()
